@@ -25,9 +25,11 @@ public class DB {
     private static Map<Integer,Libro> libros;
     private static Map<Integer,Alquiler> alquileres;
     private static Set<Usuario> usuarios;
+    private static Map<Integer,Genero> generos;
     private static int ultimoISBN=0;
     private static int ultimoIdAlq=0;
     private static int ultimoIdUser=0;
+    private static int ultimoIdGenero=0;
     
     private static Map<String,List<Libro>> librossAlquiladosPorUsuario;
     
@@ -41,6 +43,10 @@ public class DB {
     public static synchronized Alquiler getAlquiler(Integer id){
         Alquiler p= alquileres.get(id);
         return p;
+    }
+    public static synchronized Genero getGenero(Integer id){
+        Genero g=generos.get(id);
+        return g;
     }
     public static int getUltimoISBN() {
         return ultimoISBN;
@@ -76,6 +82,10 @@ public class DB {
         a.setId(++ultimoIdAlq);
         alquileres.put(ultimoIdAlq, a);
     }
+    public static synchronized void addGenero(Genero g){
+        g.setId(++ultimoIdGenero);
+        generos.put(ultimoIdGenero,g);
+    }
     public static synchronized void addUsuario(Usuario u) throws DBException{
         usuarios.add(u);
     }
@@ -92,19 +102,24 @@ public class DB {
     static{
         libros=new HashMap<Integer, Libro>();
         alquileres=new HashMap<Integer, Alquiler>();
+        generos= new HashMap<Integer, Genero>();
         usuarios=new HashSet<Usuario>();
-        libros.put(1, new Libro(1,"Ética para Amador","Fernando Savater","Disertación filosófica sobre ....",123.0,10));
-        libros.put(2, new Libro(2,"Venado Tuerto","Willy Barcenas","Corbata seda",63.0,22));
-        libros.put(3, new Libro(3," La colmena","Camilo Jose Cela","Calcetines algodon",23.0,40));
+        libros.put(1, new Libro(1,"Ética para Amador","Fernando Savater","Disertación filosófica sobre ....",123.0,10,getGenero(1)));
+        libros.put(2, new Libro(2,"Venado Tuerto","Willy Barcenas","Corbata seda",63.0,22,getGenero(1)));
+        libros.put(3, new Libro(3," La colmena","Camilo Jose Cela","Calcetines algodon",23.0,40,getGenero(2)));
         alquileres.put(1,new Alquiler(1,libros.get(1)));
         alquileres.put(2,new Alquiler(2,libros.get(1)));
         alquileres.put(3,new Alquiler(3,libros.get(2)));
         usuarios.add(new Usuario(1,"a@ruiz.es","1","adrian","ruiz"));
         usuarios.add(new Usuario(2,"ton@ton.es","1","ser","top"));
         usuarios.add(new Usuario(3,"ser@serz.es","1","ru","ghuo"));
+        generos.put(1,new Genero(1,"Drama"));
+        generos.put(2,new Genero(2,"Comedia"));
+        generos.put(3,new Genero(3,"Thriller"));
         ultimoISBN=3;
         ultimoIdAlq=3;
         ultimoIdUser=3;
+        ultimoIdGenero=3;
         
         librossAlquiladosPorUsuario= new HashMap<String,List<Libro>>();
         ArrayList<Libro> alquilados01=new ArrayList();
@@ -114,6 +129,8 @@ public class DB {
         librossAlquiladosPorUsuario.put("ton@ton.es",alquilados02);
         librossAlquiladosPorUsuario.put("ser@serz.es",alquilados03);
     }
+    
+    //Alquilar libro
     public synchronized static void alquilar(int id,String email){
         libros.get(id).setDisponible(false);
         librossAlquiladosPorUsuario.get(email).add(libros.get(id));
@@ -128,6 +145,16 @@ public class DB {
     public synchronized static List<Libro> getLibrosAlquilados(String email){
         return librossAlquiladosPorUsuario.get(email);
     }
+    //Generos
     
+    public static void altaGenero(Genero g)throws DBException{
+        if (generos.containsKey(g.getId())) {
+            throw new DBException("El género ya existe");
+        }
+        generos.put(g.getId(),g);
+    }
+    public synchronized static Collection<Genero> getAllGeneros(){
+        return generos.values();
+    }
     
 }

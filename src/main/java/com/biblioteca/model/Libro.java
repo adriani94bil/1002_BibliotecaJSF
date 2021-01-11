@@ -21,8 +21,9 @@ public class Libro implements Serializable{
     private Double precio;
     private Integer stock;
     private boolean disponible;
+    private Genero genero;
 
-    public Libro(Integer isbn, String nombre,String autor, String descripcion, Double precio, Integer stock) {
+    public Libro(Integer isbn, String nombre,String autor, String descripcion, Double precio, Integer stock,Genero g) {
         this.isbn = isbn;
         this.nombre = nombre;
         this.autor = autor;
@@ -34,7 +35,9 @@ public class Libro implements Serializable{
         } else {
             disponible=true;
         }
+        this.genero=genero;
     }
+
     public Libro(){
         
     }
@@ -93,6 +96,16 @@ public class Libro implements Serializable{
     public void setAutor(String autor) {
         this.autor = autor;
     }
+
+    public Genero getGenero() {
+        return genero;
+    }
+
+    public void setGenero(Genero genero) {
+        this.genero = genero;
+    }
+    
+    
     
     @Override
     public String toString() {
