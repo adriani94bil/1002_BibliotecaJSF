@@ -20,4 +20,7 @@ public class GeneroService {
     public Collection<Genero> getAllGenres(){
         return DB.getAllGeneros();
     }
+    public Genero getGenero(Integer id){
+        return DB.getGenero(id);
+    }
 }

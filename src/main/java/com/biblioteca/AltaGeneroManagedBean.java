@@ -10,7 +10,7 @@ import com.biblioteca.model.Genero;
 import com.biblioteca.servicios.GeneroService;
 import java.util.logging.Logger;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -18,11 +18,11 @@ import javax.faces.context.FacesContext;
  *
  * @author user
  */
-@Named(value = "altageneroMB")
-@Dependent
+@Named(value = "altaGeneroMB")
+@ApplicationScoped
 public class AltaGeneroManagedBean {
 
-    private Genero genero;
+     private Genero genero;
     
     public AltaGeneroManagedBean() {
         this.genero=new Genero();
@@ -54,5 +54,5 @@ public class AltaGeneroManagedBean {
             return "lista-generos";
         }
     }
-     
+    
 }

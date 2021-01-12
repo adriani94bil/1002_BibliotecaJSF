@@ -5,21 +5,24 @@
  */
 package com.biblioteca;
 
-import com.biblioteca.model.*;
+import com.biblioteca.model.Genero;
+import com.biblioteca.model.Libro;
 import com.biblioteca.servicios.GeneroService;
 import com.biblioteca.servicios.LibrosService;
 import java.util.Collection;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author user
  */
 @Named(value = "generosMB")
-@Dependent
+@ApplicationScoped
 public class GenerosManagedBean {
 
+    
     private Collection<Genero> coleccionGeneros;
     private Collection<Libro> coleccionLibros;
     private LibrosService servicioLibro= new LibrosService();
@@ -27,6 +30,11 @@ public class GenerosManagedBean {
     public GenerosManagedBean() {
         this.coleccionGeneros=servicioGenero.getAllGenres();
         this.coleccionLibros=servicioLibro.getAllLibros();
+    }
+    
+    @PostConstruct
+    public void inicializar(){
+        
     }
 
     public Collection<Genero> getColeccionGeneros() {
@@ -36,6 +44,4 @@ public class GenerosManagedBean {
     public Collection<Libro> getColeccionLibros() {
         return coleccionLibros;
     }
-    
-    
 }
