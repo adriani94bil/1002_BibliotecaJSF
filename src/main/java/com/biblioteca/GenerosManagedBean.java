@@ -34,7 +34,7 @@ public class GenerosManagedBean {
     
     @PostConstruct
     public void inicializar(){
-        
+        this.coleccionGeneros=servicioGenero.getAllGenres();
     }
 
     public Collection<Genero> getColeccionGeneros() {
