@@ -31,6 +31,10 @@
                 #{libro.descripcion}
             </h:column>
             <h:column>
+                <f:facet name="header"> Descripcion</f:facet>
+                #{libro.genero.descripcion}
+            </h:column>
+            <h:column>
                 <f:facet name="header"> Disponible</f:facet>
                 <h:outputLabel rendered="#{libro.disponible}" value="Disponible"></h:outputLabel>
                 <h:outputLabel rendered="#{not libro.disponible}" value="No Disponible"></h:outputLabel>

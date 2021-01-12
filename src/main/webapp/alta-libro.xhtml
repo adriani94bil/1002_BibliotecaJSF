@@ -25,9 +25,10 @@
             <br/>
             Cantidad <h:inputText value="#{altaLibro.libroNuevo.stock}" />
             <br/>
-            <h:selectOneMenu value="#{altaLibro.libroNuevo.genero}" rendered="true" >
-                <f:selectItems value="#{altaLibro.libroNuevo.genero}" var="item" itemValue="#{item}" itemLabel="#{item.nombre} #{item.apellidos}"/>
+            <h:selectOneMenu value="#{altaLibro.idGeneroSel}" rendered="true" >
+                <f:selectItems value="#{generosMB.coleccionGeneros}" var="item" itemValue="#{item.id}" itemLabel="#{item.descripcion}"/>
              </h:selectOneMenu>
+            <br/>
             <h:commandButton value="Guardar" action="#{altaLibro.altaLibro()}" />
         </h:form>
     </h:body>

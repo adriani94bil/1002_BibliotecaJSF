@@ -26,11 +26,10 @@ import javax.faces.context.FacesContext;
 public class AltaLibroManagedBean {
 
     private Libro libroNuevo;
-    private Genero generoLibro;
+    private Integer idGeneroSel;
     
     public AltaLibroManagedBean() {
         this.libroNuevo=new Libro();
-        this.generoLibro=new Genero();
     }
 
     public Libro getLibroNuevo() {
@@ -41,13 +40,14 @@ public class AltaLibroManagedBean {
         this.libroNuevo = libroNuevo;
     }
 
-    public Genero getGeneroLibro() {
-        return generoLibro;
+    public Integer getIdGeneroSel() {
+        return idGeneroSel;
     }
 
-    public void setGeneroLibro(Genero generoLibro) {
-        this.generoLibro = generoLibro;
+    public void setIdGeneroSel(Integer idGeneroSel) {
+        this.idGeneroSel = idGeneroSel;
     }
+    
     
     //Logger
     
@@ -55,13 +55,15 @@ public class AltaLibroManagedBean {
     //acciones
     
     public String altaLibro(){
-        LibrosService s=new LibrosService();
-        GeneroService sg=new GeneroService();
+        LibrosService libroService=new LibrosService();
+        GeneroService generoService= new GeneroService();
+        
         
         libroNuevo.setDisponible(true);
         FacesContext ctx=FacesContext.getCurrentInstance();
         try {
-            s.altaLibro(libroNuevo);
+            libroNuevo.setGenero(generoService.getGenero(idGeneroSel));
+            libroService.altaLibro(libroNuevo);
             log.info("Alta libro OK");
             FacesMessage msg= new FacesMessage("Alta libro ok");
             ctx.addMessage(null, msg);
