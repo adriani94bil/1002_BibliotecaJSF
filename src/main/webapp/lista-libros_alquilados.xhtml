@@ -1,34 +1,43 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
-    <h:head>
-        <title>Lista Libros alquilados</title>
-    </h:head>
-    <h:body>
-        <h1>Biblioteca Alquilar Libros</h1>
-        <br/>
-        Usuario: #{usuarioMB.user}
-        <br/>
-        Mensajes: <h:messages globalOnly="true" />
-        
-        <h:dataTable value="#{librosAlquiladosMB.collectionAlquilados}" var="libro">
-            <h:column>
-                <f:facet name="header"> Id</f:facet>
-                #{libro.isbn}
-            </h:column>
-            <h:column>
-                <f:facet name="header"> Titulo</f:facet>
-                #{libro.nombre}
-            </h:column>
-            <h:column>
-                <f:facet name="header"> Autor</f:facet>
-                #{libro.autor}
-            </h:column>
-            
-        </h:dataTable>
-    </h:body>
-</html>
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+    <body>
+
+        <ui:composition template="./WEB-INF/view/plantilla.xhtml">
+
+            <ui:define name="titulo">
+                titulo
+            </ui:define>
+
+            <ui:define name="top">
+                top
+            </ui:define>
+
+            <ui:define name="content">
+                <h4>Biblioteca Alquilar Libros</h4>
+        
+                <h:dataTable value="#{librosAlquiladosMB.collectionAlquilados}" var="libro">
+                    <h:column>
+                        <f:facet name="header"> Id</f:facet>
+                        #{libro.isbn}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"> Titulo</f:facet>
+                        #{libro.nombre}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"> Autor</f:facet>
+                        #{libro.autor}
+                    </h:column>
+
+                </h:dataTable>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

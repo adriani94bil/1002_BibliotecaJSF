@@ -23,10 +23,12 @@
         
         <div id="top" class="top">
             <h2>Biblioteca  <ui:insert name="top"> Top</ui:insert> </h2>
-            <h3>Usuario= #{usuarioMB.user}</h3>
-            <h:form id="form-logout">
-                <h:commandButton action="#{usuarioMB.logout()}" value="logout"/>
-            </h:form>
+            <h:panelGroup rendered="#{usuarioMB.user!=null}">
+                <h5>Usuario= #{usuarioMB.user}</h5>
+                <h:form id="form-logout" >
+                    <h:commandButton action="#{usuarioMB.logout()}" value="logout"/>
+                </h:form>
+            </h:panelGroup>
         </div>
         <div>
             <div id="left">

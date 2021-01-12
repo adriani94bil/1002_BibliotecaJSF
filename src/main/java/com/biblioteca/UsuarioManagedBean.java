@@ -69,7 +69,7 @@ public class UsuarioManagedBean implements Serializable {
         if (session != null) {
             session.invalidate();
         }
-        return "login";
+        return "login?faces-redirect=true";
         
     }
 }
