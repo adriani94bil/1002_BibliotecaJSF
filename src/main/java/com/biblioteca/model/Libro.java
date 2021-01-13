@@ -6,6 +6,7 @@
 package com.biblioteca.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 
@@ -19,16 +20,18 @@ public class Libro implements Serializable{
     private String autor;
     private String descripcion;
     private Double precio;
+    private Date fechaPublicacion;
     private Integer stock;
     private boolean disponible;
     private Genero genero;
 
-    public Libro(Integer isbn, String nombre,String autor, String descripcion, Double precio, Integer stock,Genero g) {
+    public Libro(Integer isbn, String nombre,String autor, String descripcion, Double precio,Date fechaPublicacion, Integer stock,Genero g) {
         this.isbn = isbn;
         this.nombre = nombre;
         this.autor = autor;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.fechaPublicacion=fechaPublicacion;
         this.stock = stock;
         if (stock==0) {
             disponible=false;
@@ -103,6 +106,14 @@ public class Libro implements Serializable{
 
     public void setGenero(Genero genero) {
         this.genero = genero;
+    }
+
+    public Date getFechaPublicacion() {
+        return fechaPublicacion;
+    }
+
+    public void setFechaPublicacion(Date fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
     }
     
     

@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -17,17 +18,35 @@
             </ui:define>
 
             <ui:define name="content">
+                Fecha Actual: <h:outputLabel value="#{usuarioMB.fecha}">
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                </h:outputLabel>
+                Precio Random <h:outputLabel value="#{usuarioMB.precio}">
+                    <f:convertNumber type="currency" maxFractionDigits="2"/>
+                </h:outputLabel>
                 <h4>Login</h4>
                 <h:form id="formLogin">
                     Email
-                    <h:inputText value="#{usuarioMB.user}" required="true" requiredMessage="Obligatorio" id="nombre"/>
+                    <h:inputText value="#{usuarioMB.user}" required="true" requiredMessage="Obligatorio" id="nombre">
+                        
+                    </h:inputText>
                     <h:message for="nombre" />
                     <br/>
                     Clave
-                    <h:inputSecret value="#{usuarioMB.clave}" required="true" requiredMessage="Obligatorio" id="pwd"/>
+                    <h:inputSecret value="#{usuarioMB.clave}" required="true" requiredMessage="Obligatorio" id="pwd">
+                        <f:validateLength minimum="1"/>
+                    </h:inputSecret>
                     <h:message for="pwd"/>
                     <br/>
-                    <h:commandButton action="#{usuarioMB.login()}" value="login"/>
+                    <h:inputText value="#{usuarioMB.fecha}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:inputText>
+                    
+                    <br/>
+                    <h:commandButton action="#{usuarioMB.login()}" value="Login"/>
+                    <h:commandButton action="index" 
+                                     value="Cancelar"
+                                     immediate="true"/>
                 </h:form>
             </ui:define>
 

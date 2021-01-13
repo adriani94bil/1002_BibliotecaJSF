@@ -41,6 +41,18 @@
                         #{libro.genero.descripcion}
                     </h:column>
                     <h:column>
+                        <f:facet name="header"> Precio </f:facet>
+                        <h:outputLabel value="#{libro.precio}">
+                            <f:convertNumber type="currency" maxFractionDigits="#{appMB.numMinDecimales}"/>
+                        </h:outputLabel>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"> Fecha Creación </f:facet>
+                        <h:outputLabel value="#{libro.fechaPublicacion}">
+                            <f:convertDateTime pattern="#{appMB.formatoFecha}"/>
+                        </h:outputLabel>
+                    </h:column>
+                    <h:column>
                         <f:facet name="header"> Disponible</f:facet>
                         <h:outputLabel rendered="#{libro.disponible}" value="Disponible"></h:outputLabel>
                         <h:outputLabel rendered="#{not libro.disponible}" value="No Disponible"></h:outputLabel>

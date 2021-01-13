@@ -28,9 +28,15 @@
                     <br/>
                     Autor <h:inputText value="#{altaLibro.libroNuevo.autor}" />
                     <br/>
-                    Precio <h:inputText value="#{altaLibro.libroNuevo.precio}" />
+                    Precio <h:inputText value="#{altaLibro.libroNuevo.precio}" >
+                        <f:convertNumber minFractionDigits="#{appMB.numMinDecimales}"/>
+                    </h:inputText>
                     <br/>
                     Cantidad <h:inputText value="#{altaLibro.libroNuevo.stock}" />
+                    <br/>
+                    <h:inputText value="#{altaLibro.libroNuevo.fechaPublicacion}">
+                        <f:convertDateTime pattern="#{appMB.formatoFecha}" />
+                    </h:inputText>
                     <br/>
                     <h:selectOneMenu value="#{altaLibro.idGeneroSel}" rendered="true" >
                         <f:selectItems value="#{generosMB.coleccionGeneros}" var="item" itemValue="#{item.id}" itemLabel="#{item.descripcion}"/>
