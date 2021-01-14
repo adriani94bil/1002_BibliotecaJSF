@@ -2,46 +2,55 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <h:head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet library="css" name="default.css"/>
-        <h:outputStylesheet library="css" name="cssLayout.css"/>
-        <h:outputScript library="js" name="funciones.js"/>
-        <title>
-            <ui:insert name="titulo">titulo</ui:insert>
-        </title>
-    </h:head>
+    <f:view locale="#{idiomaMB.idiomaUser}">
+        <h:head>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <h:body>
-        
-        <div id="top" class="top">
-            <h2>Biblioteca  <ui:insert name="top"> Top</ui:insert> </h2>
-            <h:panelGroup rendered="#{usuarioMB.user!=null}">
-                <h5>Usuario= #{usuarioMB.user}</h5>
-                <h:form id="form-logout" >
-                    <h:commandButton action="#{usuarioMB.logout()}" value="logout"/>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <h:outputStylesheet library="css" name="default.css"/>
+            <h:outputStylesheet library="css" name="cssLayout.css"/>
+            <h:outputScript library="js" name="funciones.js"/>
+            <title>
+                <ui:insert name="titulo">titulo</ui:insert>
+            </title>
+        </h:head>
+
+        <h:body>
+
+            <div id="top" class="top">
+                <h2>#{textos.app_titulo}  <ui:insert name="top"> Top</ui:insert> </h2>
+                <h:panelGroup rendered="#{usuarioMB.user!=null}">
+                    <h5>Usuario= #{usuarioMB.user}</h5>
+                    <h:form id="form-logout" >
+                        <h:commandButton action="#{usuarioMB.logout()}" value="logout"/>
+                    </h:form>
+                </h:panelGroup>
+
+                <h:form id="formIdioma">
+                    <h:commandLink value="ES" action="#{idiomaMB.cambiarIdioma('es')}" />
+                    <h:commandLink value="EN"  action="#{idiomaMB.cambiarIdioma('en')}"/>
+
                 </h:form>
-            </h:panelGroup>
-        </div>
-        <div>
-            <div id="left">
-                <ui:insert name="left">Left</ui:insert>
-                <!-- MENU-->
-                <ui:include src="menu.xhtml"/>
             </div>
-            <div id="content" class="left_content">
-                <hr/>
-                Mensajes <h:messages globalOnly="true"/>
-                <ui:insert name="content">Content</ui:insert>
+            <div>
+                <div id="left">
+                    <ui:insert name="left">Left</ui:insert>
+                    <!-- MENU-->
+                    <ui:include src="menu.xhtml"/>
+                </div>
+                <div id="content" class="left_content">
+                    <hr/>
+                    Mensajes <h:messages globalOnly="true"/>
+                    <ui:insert name="content">Content</ui:insert>
+                </div>
             </div>
-        </div>
-    </h:body>
+        </h:body>
+    </f:view>
 
 </html>
