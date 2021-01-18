@@ -69,6 +69,7 @@
             <default-locale>es</default-locale>
             <supported-locale>en</supported-locale>
         </locale-config>
+        <message-bundle>com.biblioteca.web.recursos.mensajes</message-bundle>
     </application>
     
     

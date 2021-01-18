@@ -24,6 +24,7 @@ import javax.inject.Inject;
 public class AltaGeneroManagedBean {
 
    private Genero genero;
+   private String mensajeExisteId;
    @Inject
    private GenerosManagedBean generosMB;
     

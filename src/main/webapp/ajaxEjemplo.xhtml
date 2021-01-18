@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/view/plantilla.xhtml">
+
+            <ui:define name="titulo">
+                titulo
+            </ui:define>
+
+            <ui:define name="top">
+                top
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Nombre">
+                        </h:outputLabel>
+                        <h:inputText value="#{ajaxMB.nombre}">
+                            <f:ajax event="keyup" execute="@form" render="salida"/>
+                        </h:inputText>
+                        <h:outputLabel value="Apellido"></h:outputLabel>
+                        <h:inputText value="#{ajaxMB.apellido}"/>
+                        <h:commandButton value="Incrementar">
+                            <f:ajax event="click" render="contador" execute="@none"></f:ajax>
+                        </h:commandButton>
+                    </h:panelGrid>       
+                </h:form>
+                <h2>ECO</h2>
+                <h:panelGrid columns="2" id="salida">
+                    <h:outputLabel value="Nombre">
+                    </h:outputLabel>
+                    <h:inputText value="#{ajaxMB.nombre}"/>
+                    <h:outputLabel value="Apellido"></h:outputLabel>
+                    <h:inputText value="#{ajaxMB.apellido}"/>
+                </h:panelGrid>
+                Contador: <h:outputLabel value="#{ajaxMB.contador}" id="contador"></h:outputLabel>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

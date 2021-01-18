@@ -6,15 +6,16 @@
 package com.biblioteca;
 
 import com.biblioteca.excepcion.DBException;
-import com.biblioteca.model.Genero;
 import com.biblioteca.model.Libro;
 import com.biblioteca.servicios.GeneroService;
 import com.biblioteca.servicios.LibrosService;
-import java.util.logging.Level;
+import com.sun.faces.util.MessageFactory;
 import java.util.logging.Logger;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 
 /**
@@ -52,6 +53,20 @@ public class AltaLibroManagedBean {
     //Logger
     
     private Logger log=Logger.getLogger("AltaLibroManagedBean");
+    
+    //Validadores
+    
+    public void validarAutor(FacesContext fc,
+            UIComponent componente,
+            Object value){
+        String autor=(String) value;
+        if(autor.contains("*")){
+            ((UIInput) componente).setValid(false);
+            FacesMessage msg= MessageFactory.getMessage("libros_alta_validacion_autor",null);
+            fc.addMessage(componente.getClientId(fc), msg);
+            
+        }
+    }
     //acciones
     
     public String altaLibro(){
@@ -65,12 +80,12 @@ public class AltaLibroManagedBean {
             libroNuevo.setGenero(generoService.getGenero(idGeneroSel));
             libroService.altaLibro(libroNuevo);
             log.info("Alta libro OK");
-            FacesMessage msg= new FacesMessage("Alta libro ok");
+            FacesMessage msg= MessageFactory.getMessage("libro_alta_ok", libroNuevo.getNombre());
             ctx.addMessage(null, msg);
             return "index";
         } catch (DBException ex) {
             log.severe("No dio de alta libro. "+ex.getMessage());
-            FacesMessage msg= new FacesMessage("Fallo lata libro.  "+ex.getMessage());
+            FacesMessage msg= MessageFactory.getMessage("libro_alta_error", libroNuevo.getNombre(),ex.getMessage());
             ctx.addMessage(null, msg);
             return "lista-libros";
         }

@@ -20,13 +20,18 @@
             <ui:define name="content">
                 <h4>Biblioteca alta Libro</h4>
                 <h:form id="formAltaLibro">
-                    Identificador:<h:inputText value="#{altaLibro.libroNuevo.isbn}" />
+                    Identificador:<h:inputText value="#{altaLibro.libroNuevo.isbn}" required="true" id="id">
+                        <f:validateLength minimum="1"/>
+                    </h:inputText>
+                    <h:message for="alta"/>
                     <br/>
-                    Título <h:inputText value="#{altaLibro.libroNuevo.nombre}" />
+                    Título <h:inputText value="#{altaLibro.libroNuevo.nombre}" required="true"/>
                     <br/>
-                    Descr <h:inputText value="#{altaLibro.libroNuevo.descripcion}" />
+                    Descr <h:inputText value="#{altaLibro.libroNuevo.descripcion}" required="true"/>
                     <br/>
-                    Autor <h:inputText value="#{altaLibro.libroNuevo.autor}" />
+                    Autor <h:inputText value="#{altaLibro.libroNuevo.autor}" required="true" validator="#{altaLibro.validarAutor}">
+                        
+                    </h:inputText>
                     <br/>
                     Precio <h:inputText value="#{altaLibro.libroNuevo.precio}" >
                         <f:convertNumber minFractionDigits="#{appMB.numMinDecimales}"/>
@@ -34,15 +39,16 @@
                     <br/>
                     Cantidad <h:inputText value="#{altaLibro.libroNuevo.stock}" />
                     <br/>
-                    <h:inputText value="#{altaLibro.libroNuevo.fechaPublicacion}">
+                    <h:inputText value="#{altaLibro.libroNuevo.fechaPublicacion}" required="true">
                         <f:convertDateTime pattern="#{appMB.formatoFecha}" />
                     </h:inputText>
                     <br/>
-                    <h:selectOneMenu value="#{altaLibro.idGeneroSel}" rendered="true" >
+                    <h:selectOneMenu value="#{altaLibro.idGeneroSel}" rendered="true" required="true" >
                         <f:selectItems value="#{generosMB.coleccionGeneros}" var="item" itemValue="#{item.id}" itemLabel="#{item.descripcion}"/>
                      </h:selectOneMenu>
                     <br/>
-                    <h:commandButton value="Guardar" action="#{altaLibro.altaLibro()}" />
+                    <h:message for="alta"/>
+                    <h:commandButton value="Guardar" id="alta" action="#{altaLibro.altaLibro()}" />
                 </h:form>
             </ui:define>
 
